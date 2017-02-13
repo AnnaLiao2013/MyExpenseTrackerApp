@@ -1,0 +1,86 @@
+<!DOCTYPE>
+<html ng-app="myApp">
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <title>Expense List App</title>
+</head>
+<body>
+<div class="container" ng-controller="AppCtrl">
+    <h1>Expense List App
+        <div class="logout">
+            <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-log-out"></span> Log out
+            </button>
+        </div>
+    </h1>
+
+    </br>
+
+    <div >
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Time</th>
+                <th>Action</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr name="head">
+                <td><input class="form-control" ng-model="expense.name" required></td>
+                <td><input class="form-control" ng-model="expense.desc" required></td>
+                <td><input type="number" class="form-control" ng-model="expense.number" required></td>
+                <td><span my-current-time="format"></span></td>
+                <td><button class="btn btn-primary" ng-disabled="!expense.name || !expense.desc || !expense.number " ng-click="addExpense()">Add Expense</button></td>
+                <td><button class="btn btn-info" ng-click="update()">Update</button>&nbsp;&nbsp;<button class="btn btn-info" ng-click="deselect()">Clear</button></td>
+            </tr>
+            <tr ng-repeat="contact in expenselist">
+                <td>{{contact.name}}</td>
+                <td>{{contact.desc}}</td>
+                <td>{{contact.number | currency}}</td>
+                <td>{{contact.time | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                <td><button class="btn btn-danger" ng-click="remove(contact._id)">Remove</button></td>
+                <td><button class="btn btn-warning" ng-click="edit(contact._id)">Edit</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    </br>
+
+    <div class="row">
+        <div class="form-group col-xs-4">
+            <div class="input-group date">
+                <label>Start:</label>
+                <input type="date" class="date form-control"/>
+            </div>
+        </div>
+        <div class="form-group col-xs-4">
+            <div class="input-group date">
+                <label>End:</label>
+                <input type="date" class="date form-control"/>
+            </div>
+        </div>
+        <div class="form-group col-xs-4">
+            <button class="btn btn-primary" ng-click="showReport()">Show Report</button>
+        </div>
+
+
+    </div>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+<script type="text/javascript" src="javascripts/lib/fusioncharts.js"></script>
+<script type="text/javascript" src="javascripts/lib/fusioncharts.theme.fint.js"></script>
+<script src="javascripts/controller.js"></script>
+<script src="javascripts/directives.js"></script>
+</body>
+</html>
